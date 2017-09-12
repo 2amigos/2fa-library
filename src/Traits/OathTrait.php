@@ -15,7 +15,10 @@ use Da\TwoFA\Exception\InvalidSecretKeyException;
 
 trait OathTrait
 {
-    protected $tokenLength;
+    /**
+     * @var int the length of the time based one time password token generated. Defaults to 6.
+     */
+    protected $tokenLength = 6;
 
     /**
      * Takes the secret key and the timestamp and returns the one time password.

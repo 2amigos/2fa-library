@@ -24,10 +24,6 @@ class Manager
     use OathTrait;
 
     /**
-     * @var int the length of the time based one time password token generated.
-     */
-    protected $tokenLength;
-    /**
      * @var int the period parameter that defines the time (in seconds) the OTP token will be valid. Default is 30 for
      *          Google Authenticator.
      */
@@ -65,6 +61,7 @@ class Manager
     {
         $cloned = clone $this;
         $cloned->secretKeyValidator = new SecretKeyValidator(false);
+        $cloned->encoder = new Encoder($cloned->secretKeyValidator);
 
         return $cloned;
     }
@@ -74,10 +71,10 @@ class Manager
      */
     public function enableGoogleAuthenticatorCompatibility()
     {
-        if(!$this->secretKeyValidator->isGoogleAuthenticatorCompatibilityEnforced())
-        {
+        if (!$this->secretKeyValidator->isGoogleAuthenticatorCompatibilityEnforced()) {
             $cloned = clone $this;
             $cloned->secretKeyValidator = new SecretKeyValidator();
+            $cloned->encoder = new Encoder($cloned->secretKeyValidator);
 
             return $cloned;
         }
@@ -204,13 +201,14 @@ class Manager
         $startTime = null === $previousTime
             ? $time - $cycles
             : max($time - $cycles, $previousTime + 1);
+
         $seed = $this->encoder->fromBase32($secret);
 
         if (strlen($seed) < 8) {
             throw new InvalidSecretKeyException('Secret key is too short');
         }
 
-        return $this->validateOneTimePassword($seed, $key, $startTime, $time, $previousTime);
+        return $this->validateOneTimePassword($key, $seed, $startTime, $time, $previousTime);
     }
 
     /**
