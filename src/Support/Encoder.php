@@ -21,11 +21,6 @@ class Encoder implements TotpEncoderInterface
     use SecretValidationTrait;
 
     /**
-     * @var SecretKeyValidator
-     */
-    protected $secretKeyValidator;
-
-    /**
      * Encoder constructor.
      *
      * @param SecretKeyValidator|null $secretKeyValidator

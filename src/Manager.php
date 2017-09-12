@@ -34,18 +34,14 @@ class Manager
      */
     protected $cycles = 1;
     /**
-     * @var SecretKeyValidator
-     */
-    protected $secretKeyValidator;
-    /**
-     * @var Encoder
+     * @var TotpEncoderInterface
      */
     protected $encoder;
 
     /**
      * Auth constructor.
      *
-     * @param SecretKeyValidator|null $secretKeyValidator
+     * @param SecretKeyValidator|null   $secretKeyValidator
      * @param TotpEncoderInterface|null $encoder
      */
     public function __construct(SecretKeyValidator $secretKeyValidator = null, TotpEncoderInterface $encoder = null)
@@ -106,7 +102,7 @@ class Manager
     /**
      * Wrapper function to Encoder::generateBase32RandomKey method.
      *
-     * @param int $length
+     * @param int    $length
      * @param string $prefix
      *
      * @return mixed|string
@@ -186,10 +182,10 @@ class Manager
     /**
      * Verifies user's key vs current timestamp.
      *
-     * @param string $key the user's input key
-     * @param string $secret the secret used to
-     * @param null $previousTime
-     * @param null $time
+     * @param string $key          the user's input key
+     * @param string $secret       the secret used to
+     * @param null   $previousTime
+     * @param null   $time
      *
      * @throws InvalidSecretKeyException
      * @return bool|int
@@ -214,10 +210,10 @@ class Manager
     /**
      * Validates the key (OTP) and returns true if valid, false otherwise.
      *
-     * @param string $key
-     * @param string $seed
-     * @param int $startTime
-     * @param int $time
+     * @param string   $key
+     * @param string   $seed
+     * @param int      $startTime
+     * @param int      $time
      * @param int|null $previousTime
      *
      * @return bool

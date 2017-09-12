@@ -17,6 +17,11 @@ use Da\TwoFA\Validator\SecretKeyValidator;
 trait SecretValidationTrait
 {
     /**
+     * @var SecretKeyValidator
+     */
+    protected $secretKeyValidator;
+
+    /**
      * @param string $value
      *
      * @throws InvalidSecretKeyException
