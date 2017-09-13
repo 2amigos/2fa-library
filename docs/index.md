@@ -234,7 +234,7 @@ it on our other library [yii-usuario](https://www.github.com/2amigos/yii2-usuari
 
 If you wish to check his library, please visit: 
 
--  [https://github.com/antonioribeiro/google2fa]()https://github.com/antonioribeiro/google2fa) 
+-  [https://github.com/antonioribeiro/google2fa](https://github.com/antonioribeiro/google2fa) 
 
 
 
