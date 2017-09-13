@@ -4,7 +4,6 @@ sudo: false
 language: php
 
 php:
-  - 5.6
   - 7.0
   - 7.1
 
@@ -36,7 +35,7 @@ before_script:
 
 script:
   - composer validate --no-check-lock
-  - vendor/bin/codecept run $CODECEPTION_FLAGS
+  - vendor/bin/codecept run unit $CODECEPTION_FLAGS
 
 notifications:
   email:
