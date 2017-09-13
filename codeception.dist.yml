@@ -1,8 +1,8 @@
 suites:
     unit:
         path: .
-
 settings:
+    bootstrap: _bootstrap.php
     shuffle: true
     lint: true
 paths:
@@ -10,4 +10,3 @@ paths:
     output: tests/_output
     support: tests/_support
     data: tests
-     
