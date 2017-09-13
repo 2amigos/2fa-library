@@ -3,10 +3,15 @@ suites:
         path: .
 settings:
     bootstrap: _bootstrap.php
-    shuffle: true
-    lint: true
+    colors: true
+    memory_limit: 1024M
 paths:
     tests: tests
     output: tests/_output
     support: tests/_support
     data: tests
+coverage:
+    enabled: true
+    whitelist:
+        include:
+            - src/*

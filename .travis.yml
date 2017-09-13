@@ -24,9 +24,6 @@ install:
   - travis_retry composer install --prefer-dist --no-interaction
 
 before_script:
-  - php -r "echo INTL_ICU_VERSION . \"\n\";"
-  - php -r "echo INTL_ICU_DATA_VERSION . \"\n\";"
-
   # enable code coverage on PHP 7.1, only one PHP version needs to generate coverage data
   - |
     if [ $TRAVIS_PHP_VERSION = '7.1' ]; then
