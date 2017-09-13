@@ -1,6 +1,7 @@
 <?php
 
 use Da\TwoFA\Exception\InvalidSecretKeyException;
+use Da\TwoFA\Exception\InvalidCharactersException;
 use Da\TwoFA\Manager;
 
 class ManagerTest extends \Codeception\Test\Unit
@@ -13,10 +14,6 @@ class ManagerTest extends \Codeception\Test\Unit
     protected function _before()
     {
         $this->manager = new Manager();
-    }
-
-    protected function _after()
-    {
     }
 
     public function testIsInitialized()
@@ -85,6 +82,38 @@ class ManagerTest extends \Codeception\Test\Unit
         $this->assertEquals(true, $manager->verify('410272', $secret, null, 26213400));
         $this->assertEquals(true, $manager->verify('239815', $secret, null, 26213400));
         $this->assertFalse($manager->verify('313366', $secret, null, 26213400));
+    }
+
+    public function testAttributes()
+    {
+        $manager = $this->manager->setCycles(4);
+        $this->assertNotSame($this->manager, $manager);
+        $this->assertEquals(1, $this->manager->getCycles());
+        $this->assertEquals(4, $manager->getCycles());
+
+        $this->assertEquals(6, $manager->getTokenLength());
+        $this->assertEquals(12, $manager->setTokenLength(12)->getTokenLength());
+
+        $this->assertEquals(30, $manager->getCounter());
+        $this->assertEquals(60, $manager->setCounter(60)->getCounter());
+
+        $this->assertTrue($manager->isGoogleAuthenticatorCompatibilityEnabled());
+        $manager = $manager->disableGoogleAuthenticatorCompatibility();
+        $this->assertFalse($manager->isGoogleAuthenticatorCompatibilityEnabled());
+        $manager = $manager->enableGoogleAuthenticatorCompatibility();
+        $this->assertTrue($manager->isGoogleAuthenticatorCompatibilityEnabled());
+    }
+
+    public function testInvalidCharactersException()
+    {
+        $secret = 'ADUMJO5634NPDEKW';
+
+        $this->assertTrue(is_numeric($this->manager->getCurrentOneTimePassword($secret)));
+
+        $secret = 'DUMJO5634NPDEKX@';
+        $this->expectException(InvalidSecretKeyException::class);
+        $this->expectExceptionMessage('Secret key contains invalid characters.');
+        $this->manager->getCurrentOneTimePassword($secret);
     }
 
 }

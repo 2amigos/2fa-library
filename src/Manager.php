@@ -51,6 +51,14 @@ class Manager
     }
 
     /**
+     * @return bool
+     */
+    public function isGoogleAuthenticatorCompatibilityEnabled()
+    {
+        return $this->secretKeyValidator->isGoogleAuthenticatorCompatibilityEnforced();
+    }
+
+    /**
      * @return Manager
      */
     public function disableGoogleAuthenticatorCompatibility()

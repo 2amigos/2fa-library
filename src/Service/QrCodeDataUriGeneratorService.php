@@ -43,7 +43,7 @@ class QrCodeDataUriGeneratorService implements StringGeneratorServiceInterface
      */
     public function run()
     {
-        return (new QrCode($this->totpSecretKeyUri, ErrorCorrectionLevelInterface::HIGH))
+        return (new QrCode($this->totpSecretKeyUri, ErrorCorrectionLevelInterface::MEDIUM))
             ->setSize((int)$this->size)
             ->writeDataUri();
     }

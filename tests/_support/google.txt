@@ -1,0 +1,1 @@
+https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth%3A%2F%2Ftotp%2F2amigos%3Ahola%25402amigos.us%3Fsecret%3DADUMJO5634NPDEKW%26issuer%3D2amigos
