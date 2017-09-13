@@ -1,17 +1,19 @@
 <?php
 
-use Da\TwoFA\Exception\InvalidSecretKeyException;
-use Da\TwoFA\Exception\InvalidCharactersException;
-use Da\TwoFA\Manager;
+namespace Da\TwoFA\Tests;
 
-class ManagerTest extends \Codeception\Test\Unit
+use Da\TwoFA\Exception\InvalidSecretKeyException;
+use Da\TwoFA\Manager;
+use PHPUnit\Framework\TestCase;
+
+class ManagerTest extends TestCase
 {
     /**
      * @var Manager
      */
     protected $manager;
 
-    protected function _before()
+    protected function setUp()
     {
         $this->manager = new Manager();
     }

@@ -1,16 +1,18 @@
 <?php
+namespace Da\TwoFA\Tests;
 
 use Da\TwoFA\Encoder;
 use Da\TwoFA\Validator\SecretKeyValidator;
+use PHPUnit\Framework\TestCase;
 
-class EncoderTest extends \Codeception\Test\Unit
+class EncoderTest extends TestCase
 {
     /**
      * @var Encoder
      */
     protected $encoder;
 
-    protected function _before()
+    protected function setUp()
     {
         $this->encoder = new Encoder();
     }
