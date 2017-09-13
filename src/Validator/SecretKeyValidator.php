@@ -32,7 +32,7 @@ class SecretKeyValidator implements ValidatorInterface
      */
     public function __construct($enforceGoogleAuthenticatorCompatibility = true)
     {
-        $this->googleAuthenticatorCompatibility = $enforceGoogleAuthenticatorCompatibility;
+        $this->enforceGoogleAuthenticatorCompatibility($enforceGoogleAuthenticatorCompatibility);
     }
 
     /**

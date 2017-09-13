@@ -118,4 +118,12 @@ class ManagerTest extends TestCase
         $this->manager->getCurrentOneTimePassword($secret);
     }
 
+    public function testFiresInvalidSecretKeyException()
+    {
+        $secret = 'A';
+        $this->expectException(InvalidSecretKeyException::class);
+        $this->expectExceptionMessage('Secret key is too short');
+        $this->manager->verify('none', $secret);
+    }
+
 }
