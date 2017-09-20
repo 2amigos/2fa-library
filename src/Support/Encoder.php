@@ -9,7 +9,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Da\TwoFA;
+namespace Da\TwoFA\Support;
 
 use Da\TwoFA\Contracts\TotpEncoderInterface;
 use Da\TwoFA\Traits\SecretValidationTrait;

@@ -13,6 +13,7 @@ namespace Da\TwoFA;
 
 use Da\TwoFA\Contracts\TotpEncoderInterface;
 use Da\TwoFA\Exception\InvalidSecretKeyException;
+use Da\TwoFA\Support\Encoder;
 use Da\TwoFA\Traits\OathTrait;
 use Da\TwoFA\Traits\SecretValidationTrait;
 use Da\TwoFA\Validator\OneTimePasswordValidator;

@@ -1,7 +1,7 @@
 <?php
 namespace Da\TwoFA\Tests;
 
-use Da\TwoFA\Encoder;
+use Da\TwoFA\Support\Encoder;
 use Da\TwoFA\Validator\SecretKeyValidator;
 use PHPUnit\Framework\TestCase;
 
