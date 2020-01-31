@@ -42,9 +42,6 @@
         "phpmd/phpmd": "@stable"
 
     },
-    "suggest": {
-        "2amigos/2fa-library": "To be able to create inline QrCodes data uri schemes with logos and labels"
-    },
     "autoload": {
         "psr-4": {
             "Da\\TwoFA\\": "src"
