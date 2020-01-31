@@ -12,8 +12,10 @@
 namespace Da\TwoFA\Support;
 
 use Da\TwoFA\Contracts\TotpEncoderInterface;
+use Da\TwoFA\Exception\InvalidSecretKeyException;
 use Da\TwoFA\Traits\SecretValidationTrait;
 use Da\TwoFA\Validator\SecretKeyValidator;
+use Exception;
 use ParagonIE\ConstantTime\Base32;
 
 class Encoder implements TotpEncoderInterface
@@ -32,8 +34,9 @@ class Encoder implements TotpEncoderInterface
 
     /**
      * @inheritdoc
+     * @throws InvalidSecretKeyException
      */
-    public function generateBase32RandomKey($length = 16, $prefix = '')
+    public function generateBase32RandomKey(int $length = 16, string $prefix = ''): string
     {
         $secret = $prefix ? $this->toBase32($prefix) : '';
         $secret = $this->strPadBase32($secret, $length);
@@ -46,7 +49,7 @@ class Encoder implements TotpEncoderInterface
     /**
      * @inheritdoc
      */
-    public function toBase32($value)
+    public function toBase32(string $value): string
     {
         $encoded = Base32::encodeUpper($value);
 
@@ -55,8 +58,9 @@ class Encoder implements TotpEncoderInterface
 
     /**
      * @inheritdoc
+     * @throws InvalidSecretKeyException
      */
-    public function fromBase32($value)
+    public function fromBase32(string $value): string
     {
         $value = strtoupper($value);
 
@@ -71,9 +75,10 @@ class Encoder implements TotpEncoderInterface
      * @param $from
      * @param $to
      *
+     * @throws Exception
      * @return int
      */
-    protected function getRandomNumber($from = 0, $to = 31)
+    protected function getRandomNumber(int $from = 0, int $to = 31): int
     {
         return random_int($from, $to);
     }
@@ -84,9 +89,10 @@ class Encoder implements TotpEncoderInterface
      * @param $string
      * @param $length
      *
+     * @throws Exception
      * @return string
      */
-    private function strPadBase32($string, $length)
+    private function strPadBase32(string $string, int $length): string
     {
         for ($i = 0; $i < $length; $i++) {
             $string .= substr('234567QWERTYUIOPASDFGHJKLZXCVBNM', $this->getRandomNumber(), 1);

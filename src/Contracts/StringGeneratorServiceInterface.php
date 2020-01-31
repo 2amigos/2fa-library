@@ -18,5 +18,5 @@ interface StringGeneratorServiceInterface
      *
      * @return string the resulting value of the generation.
      */
-    public function run();
+    public function run(): string;
 }

@@ -11,8 +11,6 @@
 
 namespace Da\TwoFA\Traits;
 
-use Da\TwoFA\Exception\InvalidSecretKeyException;
-
 trait OathTrait
 {
     /**
@@ -26,10 +24,9 @@ trait OathTrait
      * @param string $seed    the secret key in binary form
      * @param string $counter the time as returned by getTimestamp
      *
-     * @throws InvalidSecretKeyException
      * @return string
      */
-    protected function oathHotp($seed, $counter)
+    protected function oathHotp(string $seed, string $counter): string
     {
         // Counter must be 64-bit int
         $bin_counter = pack('N*', 0, $counter);
@@ -45,7 +42,7 @@ trait OathTrait
      *
      * @return int
      **/
-    protected function oathTruncate($hash)
+    protected function oathTruncate(string $hash): int
     {
         $offset = ord($hash[19]) & 0xf;
         $temp = unpack('N', substr($hash, $offset, 4));

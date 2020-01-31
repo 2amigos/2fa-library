@@ -89,8 +89,7 @@ class ManagerTest extends TestCase
     public function testAttributes()
     {
         $manager = $this->manager->setCycles(4);
-        $this->assertNotSame($this->manager, $manager);
-        $this->assertEquals(1, $this->manager->getCycles());
+
         $this->assertEquals(4, $manager->getCycles());
 
         $this->assertEquals(6, $manager->getTokenLength());

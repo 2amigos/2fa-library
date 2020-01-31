@@ -18,7 +18,7 @@ class GoogleAuthenticationCompatibilityValidator implements ValidatorInterface
     /**
      * @inheritdoc
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         return ((strlen($value) & (strlen($value) - 1)) === 0);
     }

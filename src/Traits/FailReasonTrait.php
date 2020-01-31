@@ -29,7 +29,7 @@ trait FailReasonTrait
     /**
      * Resets fail reason
      */
-    public function resetFailReason()
+    public function resetFailReason(): void
     {
         $this->failReason = null;
     }

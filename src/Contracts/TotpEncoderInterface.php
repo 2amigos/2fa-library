@@ -23,7 +23,7 @@ interface TotpEncoderInterface
      *
      * @return string
      */
-    public function generateBase32RandomKey($length = 16, $prefix = '');
+    public function generateBase32RandomKey(int $length = 16, string $prefix = ''): string;
 
     /**
      * Encode a string to Base32.
@@ -32,7 +32,7 @@ interface TotpEncoderInterface
      *
      * @return string
      */
-    public function toBase32($value);
+    public function toBase32(string $value): string;
 
     /**
      * Decodes a base32 string into a binary string.
@@ -43,5 +43,5 @@ interface TotpEncoderInterface
      *
      * @return string
      */
-    public function fromBase32($value);
+    public function fromBase32(string $value): string;
 }

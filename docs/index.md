@@ -20,12 +20,12 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require 2amigos/2fa-library:~1.0
+php composer.phar require 2amigos/2fa-library:^2.0
 ```
 or add
 
 ```json
-    "2amigos/2fa-library": "~1.0"
+    "2amigos/2fa-library": "^2.0"
 ```
 
 ## Usage 
@@ -240,4 +240,4 @@ If you wish to check his library, please visit:
 
 
 
-© [2amigos](http://www.2amigos.us/) 2013-2017
+© [2amigos](http://www.2amigos.us/) 2013-2020

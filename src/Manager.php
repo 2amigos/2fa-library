@@ -54,7 +54,7 @@ class Manager
     /**
      * @return bool
      */
-    public function isGoogleAuthenticatorCompatibilityEnabled()
+    public function isGoogleAuthenticatorCompatibilityEnabled(): bool
     {
         return $this->secretKeyValidator->isGoogleAuthenticatorCompatibilityEnforced();
     }
@@ -62,7 +62,7 @@ class Manager
     /**
      * @return Manager
      */
-    public function disableGoogleAuthenticatorCompatibility()
+    public function disableGoogleAuthenticatorCompatibility(): Manager
     {
         $cloned = clone $this;
         $cloned->secretKeyValidator = new SecretKeyValidator(false);
@@ -74,7 +74,7 @@ class Manager
     /**
      * @return $this|Manager
      */
-    public function enableGoogleAuthenticatorCompatibility()
+    public function enableGoogleAuthenticatorCompatibility(): self
     {
         if (!$this->secretKeyValidator->isGoogleAuthenticatorCompatibilityEnforced()) {
             $cloned = clone $this;
@@ -90,7 +90,7 @@ class Manager
     /**
      * @return int
      */
-    public function getTokenLength()
+    public function getTokenLength(): int
     {
         return $this->tokenLength;
     }
@@ -100,12 +100,11 @@ class Manager
      *
      * @return Manager
      */
-    public function setTokenLength($tokenLength)
+    public function setTokenLength($tokenLength): Manager
     {
-        $cloned = clone $this;
-        $cloned->tokenLength = $tokenLength;
+        $this->tokenLength = $tokenLength;
 
-        return $cloned;
+        return $this;
     }
 
     /**
@@ -114,9 +113,10 @@ class Manager
      * @param int    $length
      * @param string $prefix
      *
+     * @throws InvalidSecretKeyException
      * @return mixed|string
      */
-    public function generateSecretKey($length = 16, $prefix = '')
+    public function generateSecretKey(int $length = 16, string $prefix = '')
     {
         return $this->encoder->generateBase32RandomKey($length, $prefix);
     }
@@ -126,20 +126,19 @@ class Manager
      *
      * @return Manager
      */
-    public function setCycles($value)
+    public function setCycles(int $value): Manager
     {
-        $cloned = clone $this;
-        $cloned->cycles = $value;
+        $this->cycles = $value;
 
-        return $cloned;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getCycles()
+    public function getCycles(): int
     {
-        return (int)$this->cycles;
+        return $this->cycles;
     }
 
     /**
@@ -147,20 +146,19 @@ class Manager
      *
      * @return Manager
      */
-    public function setCounter($value)
+    public function setCounter(int $value): Manager
     {
-        $cloned = clone $this;
-        $cloned->counter = (int)$value;
+        $this->counter = $value;
 
-        return $cloned;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getCounter()
+    public function getCounter(): int
     {
-        return (int)$this->counter;
+        return $this->counter;
     }
 
     /**
@@ -168,7 +166,7 @@ class Manager
      *
      * @return int
      **/
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return (int)floor(microtime(true) / $this->getCounter());
     }
@@ -178,9 +176,11 @@ class Manager
      *
      * @param string $secret
      *
+     * @throws Exception\InvalidCharactersException
+     * @throws InvalidSecretKeyException
      * @return string
      */
-    public function getCurrentOneTimePassword($secret)
+    public function getCurrentOneTimePassword(string $secret): string
     {
         $timestamp = $this->getTimestamp();
         $secret = $this->encoder->fromBase32($secret);
@@ -191,15 +191,16 @@ class Manager
     /**
      * Verifies user's key vs current timestamp.
      *
-     * @param string $key          the user's input key
-     * @param string $secret       the secret used to
-     * @param null   $previousTime
-     * @param null   $time
+     * @param string   $key          the user's input key
+     * @param string   $secret       the secret used to
+     * @param int|null $previousTime
+     * @param int|null $time
      *
      * @throws InvalidSecretKeyException
+     * @throws Exception\InvalidCharactersException
      * @return bool|int
      */
-    public function verify($key, $secret, $previousTime = null, $time = null)
+    public function verify(string $key, string $secret, int $previousTime = null, int $time = null)
     {
         $time = $time ? (int)$time : $this->getTimestamp();
         $cycles = $this->getCycles();
@@ -227,8 +228,13 @@ class Manager
      *
      * @return bool
      */
-    protected function validateOneTimePassword($key, $seed, $startTime, $time, $previousTime = null)
-    {
+    protected function validateOneTimePassword(
+        string $key,
+        string $seed,
+        int $startTime,
+        int $time,
+        $previousTime = null
+    ): bool {
         return (new OneTimePasswordValidator(
             $seed,
             $this->getCycles(),

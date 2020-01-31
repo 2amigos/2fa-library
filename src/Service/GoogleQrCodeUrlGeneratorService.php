@@ -30,7 +30,7 @@ final class GoogleQrCodeUrlGeneratorService implements StringGeneratorServiceInt
      * @param string $totpSecreteKeyUri
      * @param int    $size
      */
-    public function __construct($totpSecreteKeyUri, $size = 200)
+    public function __construct(string $totpSecreteKeyUri, int $size = 200)
     {
         $this->totpSecretKeyUri = $totpSecreteKeyUri;
         $this->size = $size;
@@ -39,7 +39,7 @@ final class GoogleQrCodeUrlGeneratorService implements StringGeneratorServiceInt
     /**
      * @inheritdoc
      */
-    public function run()
+    public function run(): string
     {
         return sprintf('https://chart.googleapis.com/%s?%s', rawurlencode('chart'), $this->getQueryParameters());
     }
@@ -47,7 +47,7 @@ final class GoogleQrCodeUrlGeneratorService implements StringGeneratorServiceInt
     /**
      * @return string the constructed query parameters for google charts.
      */
-    protected function getQueryParameters()
+    protected function getQueryParameters(): string
     {
         return sprintf(
             'chs=%sx%s&chld=M|0&cht=qr&chl=%s',

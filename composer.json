@@ -29,7 +29,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.3",
+        "2amigos/qrcode-library": "^2.0",
         "paragonie/constant_time_encoding": "^1.0|^2.0",
         "paragonie/random_compat": "^1.4|^2.0"
     },
@@ -38,8 +39,8 @@
         "friendsofphp/php-cs-fixer": "^2.3",
         "scrutinizer/ocular": "~1.1",
         "squizlabs/php_codesniffer": "*",
-        "phpmd/phpmd": "@stable",
-        "2amigos/qrcode-library": "^1.1"
+        "phpmd/phpmd": "@stable"
+
     },
     "suggest": {
         "2amigos/2fa-library": "To be able to create inline QrCodes data uri schemes with logos and labels"

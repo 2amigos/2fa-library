@@ -30,23 +30,23 @@ class SecretKeyValidator implements ValidatorInterface
      *
      * @param bool $enforceGoogleAuthenticatorCompatibility
      */
-    public function __construct($enforceGoogleAuthenticatorCompatibility = true)
+    public function __construct(bool $enforceGoogleAuthenticatorCompatibility = true)
     {
         $this->enforceGoogleAuthenticatorCompatibility($enforceGoogleAuthenticatorCompatibility);
     }
 
     /**
-     * @param $enforce
+     * @param bool $enforce
      */
-    public function enforceGoogleAuthenticatorCompatibility($enforce)
+    public function enforceGoogleAuthenticatorCompatibility(bool $enforce): void
     {
-        $this->googleAuthenticatorCompatibility = (bool)$enforce;
+        $this->googleAuthenticatorCompatibility = $enforce;
     }
 
     /**
      * @return bool
      */
-    public function isGoogleAuthenticatorCompatibilityEnforced()
+    public function isGoogleAuthenticatorCompatibilityEnforced(): bool
     {
         return $this->googleAuthenticatorCompatibility;
     }
@@ -56,7 +56,7 @@ class SecretKeyValidator implements ValidatorInterface
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         try {
             $this->resetFailReason();
@@ -68,7 +68,7 @@ class SecretKeyValidator implements ValidatorInterface
             $this->failReason = 'Google incompatible secret key.';
         }
 
-        return null === $this->failReason ? true : false;
+        return null === $this->failReason;
     }
 
     /**
@@ -78,11 +78,13 @@ class SecretKeyValidator implements ValidatorInterface
      *
      * @throws GoogleAuthenticatorCompatibilityException
      */
-    protected function checkGoogleAuthenticatorCompatibility($value)
+    protected function checkGoogleAuthenticatorCompatibility(string $value): void
     {
-        if ($this->isGoogleAuthenticatorCompatibilityEnforced() &&
-            !(new GoogleAuthenticationCompatibilityValidator())->validate($value)) {
-            throw new GoogleAuthenticatorCompatibilityException();
+        if (
+            $this->isGoogleAuthenticatorCompatibilityEnforced()
+            && !(new GoogleAuthenticationCompatibilityValidator())->validate($value)
+        ) {
+            throw new GoogleAuthenticatorCompatibilityException('Not google compatible key');
         }
     }
 
@@ -93,10 +95,10 @@ class SecretKeyValidator implements ValidatorInterface
      *
      * @throws InvalidCharactersException
      */
-    protected function checkForValidCharacters($value)
+    protected function checkForValidCharacters(string $value): void
     {
         if (!(new CharactersValidator())->validate($value)) {
-            throw new InvalidCharactersException();
+            throw new InvalidCharactersException('Invalid secret value');
         }
     }
 }

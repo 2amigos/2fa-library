@@ -49,8 +49,14 @@ class OneTimePasswordValidator implements ValidatorInterface
      * @param int      $time
      * @param int|null $previousTime
      */
-    public function __construct($seed, $cycles, $tokenLength, $startTime, $time, $previousTime = null)
-    {
+    public function __construct(
+        string $seed,
+        int $cycles,
+        int $tokenLength,
+        int $startTime,
+        int $time,
+        int $previousTime = null
+    ) {
         $this->seed = $seed;
         $this->cycles = $cycles;
         $this->tokenLength = $tokenLength;
@@ -62,8 +68,6 @@ class OneTimePasswordValidator implements ValidatorInterface
     /**
      * Validates OTP. If `$previousTime` has been added, it will return the `$startTime`, otherwise it will return a
      * bool value. This is done to prevent an attacker to use the same key again.
-     *
-     * @param string $value
      *
      * @param mixed $value
      *

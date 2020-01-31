@@ -55,7 +55,7 @@ final class TOTPSecretKeyUriGeneratorService implements StringGeneratorServiceIn
     /**
      * @inheritdoc
      */
-    public function run()
+    public function run(): string
     {
         return sprintf(
             'otpauth://totp/%s:%s?secret=%s&issuer=%s',

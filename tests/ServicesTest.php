@@ -45,6 +45,7 @@ class ServicesTest extends TestCase
         ))->run();
 
         $uri = (new QrCodeDataUriGeneratorService($totp))->run();
+
         $this->assertStringEqualsFile(__DIR__ . '/_data/uri.txt', $uri);
     }
 

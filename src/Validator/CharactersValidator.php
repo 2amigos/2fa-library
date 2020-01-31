@@ -18,8 +18,8 @@ class CharactersValidator implements ValidatorInterface
     /**
      * @inheritdoc
      */
-    public function validate($value)
+    public function validate($value): bool
     {
-        return (bool) preg_match('/^[ABCDEFGHIJKLMNOPQRSTUVWXYZ234567]+$/', $value);
+        return (bool)preg_match('/^[ABCDEFGHIJKLMNOPQRSTUVWXYZ234567]+$/', $value);
     }
 }

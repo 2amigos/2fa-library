@@ -26,7 +26,7 @@ trait SecretValidationTrait
      *
      * @throws InvalidSecretKeyException
      */
-    public function validateSecret($value)
+    public function validateSecret(string $value): void
     {
         if ($this->secretKeyValidator instanceof SecretKeyValidator && !$this->secretKeyValidator->validate($value)) {
             throw new InvalidSecretKeyException($this->secretKeyValidator->getFailReason());

@@ -32,7 +32,7 @@ class QrCodeDataUriGeneratorService implements StringGeneratorServiceInterface
      * @param string $totpSecreteKeyUri
      * @param int    $size
      */
-    public function __construct($totpSecreteKeyUri, $size = 200)
+    public function __construct(string $totpSecreteKeyUri, int $size = 200)
     {
         $this->totpSecretKeyUri = $totpSecreteKeyUri;
         $this->size = $size;
@@ -41,7 +41,7 @@ class QrCodeDataUriGeneratorService implements StringGeneratorServiceInterface
     /**
      * @inheritdoc
      */
-    public function run()
+    public function run(): string
     {
         return (new QrCode($this->totpSecretKeyUri, ErrorCorrectionLevelInterface::MEDIUM))
             ->setSize((int)$this->size)
