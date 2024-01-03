@@ -13,7 +13,7 @@ class ManagerTest extends TestCase
      */
     protected $manager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->manager = new Manager();
     }
