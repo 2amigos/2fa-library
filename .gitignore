@@ -55,3 +55,4 @@ codeception.yml
 
 # composer.lock
 composer.lock
+/xdebug
