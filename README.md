@@ -1,6 +1,6 @@
 2fa library
 ===========
-
+[![tests](https://github.com/2amigos/2fa-library/actions/workflows/ci.yml/badge.svg)](https://github.com/2amigos/2fa-library/actions/workflows/ci.yml)
 [![Latest Version](https://img.shields.io/github/tag/2amigos/2fa-library.svg?style=flat-square&label=release)](https://github.com/2amigos/2fa-library/tags)
 [![Software License](https://img.shields.io/badge/license-BSD-brightgreen.svg?style=flat-square)](LICENSE.md)
 
